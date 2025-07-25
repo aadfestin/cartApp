@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "963922072367",
+    "project_id": "sample-25686",
+    "storage_bucket": "sample-25686.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963922072367:android:d99b90054baffaffd387da",
+        "android_client_info": {
+          "package_name": "com.example.camera2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7see2fPFZUVDMyjW8CX9N7UfCaboP7O0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963922072367:android:998c24c44f407e91d387da",
+        "android_client_info": {
+          "package_name": "com.example.purchasing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7see2fPFZUVDMyjW8CX9N7UfCaboP7O0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
