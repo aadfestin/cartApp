@@ -72,19 +72,22 @@ open class BaseActivity : AppCompatActivity() {
         })
 
 
+        //These go to respective fragments
+
         findViewById<ImageButton>(R.id.home_button).setOnClickListener {
-            viewPager.currentItem = 0 // Go to Home fragment
+            viewPager.currentItem = 0
         }
 
         findViewById<ImageButton>(R.id.cart_button).setOnClickListener {
-            viewPager.currentItem = 1 // Go to Cart fragment
+            viewPager.currentItem = 1
         }
 
-        findViewById<ImageButton>(R.id.logout_button).setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+        findViewById<ImageButton>(R.id.payment_button).setOnClickListener {
+            viewPager.currentItem = 2
         }
+
+
+
     }
 
     private fun openFragment(fragment: Fragment) {

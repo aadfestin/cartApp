@@ -25,6 +25,7 @@ class CartFragment : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,6 +33,8 @@ class CartFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = CartAdapter(Cart.items, requireContext())
         recyclerView.adapter = adapter
+
+
     }
 }
 

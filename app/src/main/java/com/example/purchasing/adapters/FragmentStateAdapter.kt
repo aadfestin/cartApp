@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.purchasing.CartFragment
 import com.example.purchasing.HomeFragment
+import com.example.purchasing.PaymentFragment
 
 class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2
@@ -13,6 +14,7 @@ class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activi
         return when (position) {
             0 -> HomeFragment()
             1 -> CartFragment()
+            2 -> PaymentFragment()
             else -> throw IllegalArgumentException("Invalid position")
         }
     }
