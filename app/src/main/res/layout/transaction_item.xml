@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/rounded_background">
+
+    <TextView
+        android:id="@+id/transaction_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order #1001"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/transaction_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2025-07-25"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/transaction_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cash"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/transaction_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₱500.00"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:textStyle="bold"/>
+</LinearLayout>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.widget.Toast
+// import android.widget.Toast
 
 class ProfileFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
         val emailText = view.findViewById<TextView>(R.id.profileEmail)
         val editButton = view.findViewById<Button>(R.id.editProfileButton)
 
-        // Dummy data: Add a user model and Database entries later
+        // Dummy data: Add a user model and Database entries for example later on
         nameText.text = "Sophie"
         emailText.text = "sophix@gmail.com"
 

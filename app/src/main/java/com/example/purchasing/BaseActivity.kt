@@ -2,7 +2,6 @@ package com.example.purchasing
 
 import android.content.Intent
 import android.graphics.Color
-import android.provider.ContactsContract
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,9 +13,9 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.purchasing.adapters.MainPagerAdapter
 
 open class BaseActivity : AppCompatActivity() {
-
 
     override fun setContentView(layoutResID: Int) {
         FirebaseApp.initializeApp(this)
@@ -27,7 +26,7 @@ open class BaseActivity : AppCompatActivity() {
         // ----- Drawer + Toolbar -----
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.WHITE)
         setSupportActionBar(toolbar)
 
         val drawerToggle = ActionBarDrawerToggle(
@@ -39,8 +38,7 @@ open class BaseActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
-
-        // menu item clicks
+        // Drawer menu clicks
         findViewById<NavigationView>(R.id.nav_view)
             .setNavigationItemSelectedListener { item ->
                 when (item.itemId) {
@@ -57,9 +55,9 @@ open class BaseActivity : AppCompatActivity() {
                 true
             }
 
-
-        // Get reference to ViewPager2 from the base layout
+        // ----- ViewPager2 Setup -----
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        viewPager.adapter = MainPagerAdapter(this)  // Ensure this includes PaymentFragment
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -72,28 +70,43 @@ open class BaseActivity : AppCompatActivity() {
         })
 
 
-        //These go to respective fragments
 
+        // ----- Bottom Button Navigation -----
         findViewById<ImageButton>(R.id.home_button).setOnClickListener {
-            viewPager.currentItem = 0
+            showViewPagerPage(0)
         }
 
         findViewById<ImageButton>(R.id.cart_button).setOnClickListener {
-            viewPager.currentItem = 1
+            showViewPagerPage(1)
         }
 
         findViewById<ImageButton>(R.id.payment_button).setOnClickListener {
-            viewPager.currentItem = 2
+            showViewPagerPage(2)
         }
 
+        findViewById<ImageButton>(R.id.transaction_button).setOnClickListener {
+            showViewPagerPage(3)
+        }
 
 
     }
 
+    private fun showViewPagerPage(pageIndex: Int) {
+        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        val extraContainer = findViewById<View>(R.id.extra_fragment_container)
+
+        extraContainer.visibility = View.GONE
+        viewPager.visibility = View.VISIBLE
+        viewPager.currentItem = pageIndex
+    }
+
+
     private fun openFragment(fragment: Fragment) {
-        // Hide ViewPager and show the extra container
-        findViewById<View>(R.id.viewPager).visibility = View.GONE
-        findViewById<View>(R.id.extra_fragment_container).visibility = View.VISIBLE
+        val viewPager = findViewById<View>(R.id.viewPager)
+        val extraContainer = findViewById<View>(R.id.extra_fragment_container)
+
+        viewPager.visibility = View.GONE
+        extraContainer.visibility = View.VISIBLE
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.extra_fragment_container, fragment)

@@ -63,6 +63,16 @@
                 android:contentDescription="Home" />
 
             <ImageButton
+                android:id="@+id/transaction_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/overview_24px"
+                android:background="@android:color/transparent"
+                android:contentDescription="Transactions" />
+
+
+            <ImageButton
                 android:id="@+id/cart_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
