@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.purchasing.adapters.TransactionAdapter
 import com.example.purchasing.models.Transaction
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class TransactionHistoryFragment : Fragment() {
 
@@ -28,16 +31,48 @@ class TransactionHistoryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = TransactionAdapter(transactions)
         recyclerView.adapter = adapter
+        loadTransactionsFromFirestore()
 
-        // TODO: Load transaction history from Firestore or local storage
-        loadDummyTransactions()
     }
 
-    private fun loadDummyTransactions() {
-        // TODO: replace sample data
-        transactions.add(Transaction("Order #1001", "2025-07-25", "Cash",500.0))
-        transactions.add(Transaction("Order #1002", "2025-07-24", "Cash", 250.0))
-        transactions.add(Transaction("Order #1003", "2025-07-23", "Card",300.0))
-        adapter.notifyDataSetChanged()
+    private fun loadTransactionsFromFirestore() {
+        val db = FirebaseFirestore.getInstance()
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        db.collection("transactions")
+            .whereEqualTo("userId", currentUserId)
+            .get()
+            .addOnSuccessListener { documents ->
+                transactions.clear()
+                if (!documents.isEmpty) {
+                    for (document in documents) {
+                        val transaction = document.toObject(Transaction::class.java)
+                        transactions.add(transaction)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+                toggleEmptyState()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Failed to load transactions", Toast.LENGTH_SHORT).show()
+            }
     }
+
+    private fun toggleEmptyState() {
+        val noTransactionsView = view?.findViewById<View>(R.id.no_transactions_text)
+        if (transactions.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            noTransactionsView?.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            noTransactionsView?.visibility = View.GONE
+        }
+    }
+
+
+
+    fun refreshTransactions() {
+        loadTransactionsFromFirestore()
+    }
+
 }

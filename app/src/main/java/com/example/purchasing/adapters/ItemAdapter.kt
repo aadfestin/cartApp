@@ -28,6 +28,7 @@ class ItemAdapter(
         val addButton: ImageButton = itemView.findViewById(R.id.add_button)
         val removeButton: ImageButton = itemView.findViewById(R.id.remove_button)
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
+        val price: TextView = itemView.findViewById(R.id.item_price)
 
         init {
             itemView.setOnClickListener {
@@ -61,7 +62,8 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = itemList[position]
 
-        holder.text.text = "${item.name}"
+        holder.text.text = item.name
+        holder.price.text = context.getString(R.string.price_format, item.price)
 
         holder.addButton.setOnClickListener {
             Cart.add(item)

@@ -28,5 +28,10 @@ object Cart {
     fun removeAllWithId(id: Int) {
         items.removeAll { it.id == id }
     }
+
+    fun getTotalPrice(): Double {
+        return items.sumOf { it.price * it.quantity }
+    }
+
 }
 

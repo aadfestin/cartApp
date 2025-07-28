@@ -32,14 +32,16 @@ class PaymentFragment : Fragment() {
 
         // Payment options
         val paymentOptions = mutableListOf(
-            PaymentOption("1", "Credit Card", R.drawable.credit_card_24px),
-            PaymentOption("2", "Cash", R.drawable.payments_24px)
+            PaymentOption("1", userId = "", name = "Credit Card", iconResId = R.drawable.credit_card_24px),
+            PaymentOption("2", userId = "", name = "Cash", iconResId = R.drawable.payments_24px)
         )
+
 
         paymentAdapter = PaymentOptionAdapter(paymentOptions) { selectedOption ->
             Toast.makeText(requireContext(), "Selected: ${selectedOption.name}", Toast.LENGTH_SHORT).show()
         }
 
         paymentRecyclerView.adapter = paymentAdapter
+
     }
 }

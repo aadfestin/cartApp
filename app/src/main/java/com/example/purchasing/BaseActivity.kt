@@ -66,6 +66,10 @@ open class BaseActivity : AppCompatActivity() {
                     val cartFragment = supportFragmentManager.findFragmentByTag("f1") as? CartFragment
                     cartFragment?.refreshCart()
                 }
+                if (position == 3){
+                    val transactionFragment = supportFragmentManager.findFragmentByTag("f3") as? TransactionHistoryFragment
+                    transactionFragment?.refreshTransactions()
+                }
             }
         })
 
@@ -77,14 +81,15 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.cart_button).setOnClickListener {
+            showViewPagerPage(2)
+        }
+
+
+        findViewById<ImageButton>(R.id.transaction_button).setOnClickListener {
             showViewPagerPage(1)
         }
 
         findViewById<ImageButton>(R.id.payment_button).setOnClickListener {
-            showViewPagerPage(2)
-        }
-
-        findViewById<ImageButton>(R.id.transaction_button).setOnClickListener {
             showViewPagerPage(3)
         }
 

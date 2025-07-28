@@ -14,8 +14,10 @@ import com.example.purchasing.utils.Cart
 
 class CartAdapter(
     private val cartItems: MutableList<Item>,
-    private val context: Context
+    private val context: Context,
+    private val onCartUpdated: () -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+
 
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemText: TextView = itemView.findViewById(R.id.item_text)
@@ -33,6 +35,14 @@ class CartAdapter(
         val item = cartItems[position]
         holder.itemText.text = "${item.name} x${item.quantity}"
 
+        // Show price per item (quantity x price)
+        val priceTextView: TextView = holder.itemView.findViewById(R.id.item_price)
+        val itemTotalPrice = item.price * item.quantity
+        priceTextView.text = holder.itemView.context.getString(
+            R.string.price_format,
+            itemTotalPrice
+        )
+
         holder.addButton.setOnClickListener {
             Cart.add(item)
             notifyItemChanged(holder.bindingAdapterPosition)
@@ -48,8 +58,9 @@ class CartAdapter(
 
         val deleteButton: ImageButton? = holder.itemView.findViewById(R.id.delete_button)
         deleteButton?.visibility = View.GONE
-
     }
+
+
 
     override fun getItemCount(): Int = cartItems.size
 }

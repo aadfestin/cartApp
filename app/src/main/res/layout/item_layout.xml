@@ -10,55 +10,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-
-
-        <!-- Text -->
-        <TextView
-            android:id="@+id/item_text"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="Item title"
-            android:textSize="18sp" />
-
-        <!-- Add Button -->
-        <ImageButton
-            android:id="@+id/add_button"
-            android:layout_width="wrap_content"
+        <!-- Item Title & Price Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/add_circle_24px"
-            android:tint="@color/purple_500"
-            android:contentDescription="Add" />
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/item_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Item title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₱0.00"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_green_dark" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/delete_24px"
-            android:contentDescription="Delete"
-            android:background="@android:color/transparent"
-            android:tint="@color/purple_500"/>
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="8dp">
 
-        <ImageButton
-            android:id="@+id/remove_button"
-            android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/add_circle_24px"
+                android:tint="@color/purple_500"
+                android:contentDescription="Add" />
+
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete_24px"
+                android:contentDescription="Delete"
+                android:background="@android:color/transparent"
+                android:tint="@color/purple_500"/>
+
+            <ImageButton
+                android:id="@+id/remove_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cancel_24px"
+                android:background="@android:color/transparent"
+                android:tint="@color/purple_500"
+                android:contentDescription="Remove" />
+        </LinearLayout>
+
+        <!-- Detail Container -->
+        <FrameLayout
+            android:id="@+id/item_detail_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/cancel_24px"
-            android:background="@android:color/transparent"
-            android:tint="@color/purple_500"
-            android:contentDescription="Remove" />
-
+            android:layout_marginTop="8dp" />
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/item_detail_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        />
 
 </androidx.cardview.widget.CardView>

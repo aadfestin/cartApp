@@ -14,9 +14,11 @@ class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activi
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> HomeFragment()
-            1 -> PaymentFragment()
+            1 -> TransactionHistoryFragment()
             2 -> CartFragment()
-            3 -> TransactionHistoryFragment()
+            3 -> PaymentFragment()
+
+
             else -> throw IllegalArgumentException("Invalid position")
         }
     }
