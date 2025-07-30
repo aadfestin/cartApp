@@ -138,6 +138,7 @@ open class BaseActivity : AppCompatActivity() {
         finish()
     }
 
+
     private fun showAboutDialog() {
         androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("About This App")
