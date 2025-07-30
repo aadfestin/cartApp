@@ -14,6 +14,7 @@ import com.google.firebase.FirebaseApp
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.purchasing.adapters.MainPagerAdapter
+import com.google.firebase.auth.FirebaseAuth
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -39,21 +40,25 @@ open class BaseActivity : AppCompatActivity() {
         drawerToggle.syncState()
 
         // Drawer menu clicks
+        // Drawer menu clicks
         findViewById<NavigationView>(R.id.nav_view)
             .setNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.nav_profile -> {
                         openFragment(ProfileFragment())
                     }
+                    R.id.nav_about -> {
+                        showAboutDialog()
+                    }
+
                     R.id.nav_logout -> {
-                        val i = Intent(this, LoginActivity::class.java)
-                        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(i)
+                        logoutUser()
                     }
                 }
                 drawerLayout.closeDrawers()
                 true
             }
+
 
         // ----- ViewPager2 Setup -----
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
@@ -89,8 +94,11 @@ open class BaseActivity : AppCompatActivity() {
             showViewPagerPage(1)
         }
 
-        findViewById<ImageButton>(R.id.payment_button).setOnClickListener {
+        findViewById<ImageButton>(R.id.profile_button).setOnClickListener {
             showViewPagerPage(3)
+        }
+        findViewById<ImageButton>(R.id.logout_button).setOnClickListener {
+            logoutUser()
         }
 
 
@@ -118,5 +126,30 @@ open class BaseActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
+    private fun logoutUser() {
+        FirebaseAuth.getInstance().signOut()
+
+        // Redirect to login activity
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun showAboutDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("About This App")
+            .setMessage(
+                "Purchasing App v1.0\n\n" +
+                        "This app allows you to browse products, add items to your cart, " +
+                        "view your transaction history, and manage your profile.\n\n" +
+                        "Developed by [Your Name]."
+            )
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
 
 }

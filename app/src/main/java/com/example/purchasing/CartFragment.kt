@@ -29,9 +29,10 @@ class CartFragment : Fragment() {
         totalPriceView = view.findViewById(R.id.cart_total_price)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = CartAdapter(Cart.items, requireContext()) {
+        adapter = CartAdapter(requireContext()) {
             updateTotalPrice()
         }
+
         recyclerView.adapter = adapter
 
         updateTotalPrice()

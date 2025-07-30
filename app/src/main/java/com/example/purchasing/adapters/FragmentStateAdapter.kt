@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.purchasing.CartFragment
 import com.example.purchasing.HomeFragment
-import com.example.purchasing.PaymentFragment
+import com.example.purchasing.ProfileFragment
 import com.example.purchasing.TransactionHistoryFragment
 
 class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
@@ -16,7 +16,7 @@ class MainPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activi
             0 -> HomeFragment()
             1 -> TransactionHistoryFragment()
             2 -> CartFragment()
-            3 -> PaymentFragment()
+            3 -> ProfileFragment()
 
 
             else -> throw IllegalArgumentException("Invalid position")

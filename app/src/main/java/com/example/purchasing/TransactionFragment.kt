@@ -31,9 +31,31 @@ class TransactionHistoryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = TransactionAdapter(transactions)
         recyclerView.adapter = adapter
-        loadTransactionsFromFirestore()
+        // loadTransactionsFromFirestore()
+        addDummyTransactions()
 
     }
+
+
+
+    private fun addDummyTransactions() {
+        transactions.clear()
+        transactions.add(
+            Transaction(
+                date = "2025-07-30",
+                amount = 250.0,
+            )
+        )
+        transactions.add(
+            Transaction(
+                date = "2025-07-29",
+                amount = 100.0,
+
+            )
+        )
+        adapter.notifyDataSetChanged()
+    }
+
 
     private fun loadTransactionsFromFirestore() {
         val db = FirebaseFirestore.getInstance()

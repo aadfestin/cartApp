@@ -13,11 +13,9 @@ import com.example.purchasing.models.Item
 import com.example.purchasing.utils.Cart
 
 class CartAdapter(
-    private val cartItems: MutableList<Item>,
     private val context: Context,
     private val onCartUpdated: () -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-
 
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemText: TextView = itemView.findViewById(R.id.item_text)
@@ -32,35 +30,29 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val item = cartItems[position]
+        val item = Cart.items[position]
         holder.itemText.text = "${item.name} x${item.quantity}"
 
-        // Show price per item (quantity x price)
+        // Show price per item
         val priceTextView: TextView = holder.itemView.findViewById(R.id.item_price)
-        val itemTotalPrice = item.price * item.quantity
         priceTextView.text = holder.itemView.context.getString(
-            R.string.price_format,
-            itemTotalPrice
+            R.string.price_format, item.price * item.quantity
         )
 
         holder.addButton.setOnClickListener {
             Cart.add(item)
             notifyItemChanged(holder.bindingAdapterPosition)
+            onCartUpdated()
             Toast.makeText(context, "${item.name} added to cart", Toast.LENGTH_SHORT).show()
         }
 
         holder.removeButton.setOnClickListener {
             Cart.remove(item)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, cartItems.size)
+            notifyDataSetChanged() // Update whole list since items might shift
+            onCartUpdated()
             Toast.makeText(context, "${item.name} removed from cart", Toast.LENGTH_SHORT).show()
         }
-
-        val deleteButton: ImageButton? = holder.itemView.findViewById(R.id.delete_button)
-        deleteButton?.visibility = View.GONE
     }
 
-
-
-    override fun getItemCount(): Int = cartItems.size
+    override fun getItemCount(): Int = Cart.items.size
 }

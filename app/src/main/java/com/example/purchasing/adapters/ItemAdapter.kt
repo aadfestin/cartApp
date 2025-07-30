@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.purchasing.utils.Cart
 import com.example.purchasing.R
-import com.example.purchasing.fragments.ItemDetailsFragment
 import com.example.purchasing.models.Item
 
 class ItemAdapter(
@@ -30,27 +29,6 @@ class ItemAdapter(
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
         val price: TextView = itemView.findViewById(R.id.item_price)
 
-        init {
-            itemView.setOnClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val item = itemList[position]
-
-                    if (context is AppCompatActivity) {
-                        val fragment = ItemDetailsFragment().apply {
-                            arguments = Bundle().apply {
-                                putString("item_name", item.name)
-                            }
-                        }
-
-                        context.supportFragmentManager.beginTransaction()
-                            .replace(R.id.item_detail_text, fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
-                }
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

@@ -27,9 +27,7 @@ class TransactionAdapter(
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val transaction = transactions[position]
-        holder.description.text = transaction.description
         holder.date.text = transaction.date
-        holder.method.text = transaction.method
         holder.amount.text = "₱${transaction.amount}"
     }
 

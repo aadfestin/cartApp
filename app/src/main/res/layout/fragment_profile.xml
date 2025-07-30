@@ -26,7 +26,7 @@
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text="Loading..."
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -36,15 +36,19 @@
             android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="john.doe@example.com"
+            android:text="Loading..."
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Edit Button -->
-        <Button
-            android:id="@+id/editProfileButton"
+        <!-- Wallet -->
+        <TextView
+            android:id="@+id/profileWallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile" />
+            android:text="₱0.00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
     </LinearLayout>
 </ScrollView>

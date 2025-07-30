@@ -7,10 +7,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class LoginActivity : Activity() {
 
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,11 @@ class LoginActivity : Activity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        if (user != null) {
+                            saveUserToFirestore(user.uid, email)
+                        }
+
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -43,5 +51,22 @@ class LoginActivity : Activity() {
                     }
                 }
         }
+    }
+
+    private fun saveUserToFirestore(uid: String, email: String) {
+        val userData = hashMapOf(
+            "email" to email,
+            "wallet" to 500.0 // default wallet amount
+        )
+
+        // Use merge to preserve existing fields like name
+        db.collection("user").document(uid)
+            .set(userData, SetOptions.merge())
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save user: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

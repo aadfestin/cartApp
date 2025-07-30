@@ -17,5 +17,6 @@
     <string name="item_added">%1$s added to cart</string>
     <string name="item_removed">%1$s removed from cart</string>
     <string name="total_price_format">Total: ₱%.2f</string>
+    <string name="wallet_balance"> Wallet Balance: ₱ %1$,.2f</string>
 
 </resources>

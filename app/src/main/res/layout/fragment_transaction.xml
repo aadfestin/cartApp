@@ -1,15 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp"
-    android:background="@android:color/white">
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/no_transactions_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No transactions yet."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="#888888"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactionRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingBottom="8dp" />
 

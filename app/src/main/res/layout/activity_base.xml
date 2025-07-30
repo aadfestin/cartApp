@@ -82,13 +82,22 @@
                 android:contentDescription="Cart" />
 
             <ImageButton
-                android:id="@+id/payment_button"
+                android:id="@+id/profile_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:src="@drawable/payments_24px"
+                android:src="@drawable/account_circle_24px"
                 android:background="@android:color/transparent"
-                android:contentDescription="Payment Options" />
+                android:contentDescription="Profile" />
+
+            <ImageButton
+                android:id="@+id/logout_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logout_24px"
+                android:background="@android:color/transparent"
+                android:contentDescription="Logout" />
         </LinearLayout>
     </LinearLayout>
 
