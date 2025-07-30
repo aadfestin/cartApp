@@ -146,7 +146,7 @@ open class BaseActivity : AppCompatActivity() {
                 "Purchasing App v1.0\n\n" +
                         "This app allows you to browse products, add items to your cart, " +
                         "view your transaction history, and manage your profile.\n\n" +
-                        "Developed by [Your Name]."
+                        "Developed by Supsoft Tech Interns."
             )
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
